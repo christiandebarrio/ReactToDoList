@@ -9,6 +9,7 @@ const Filters = ({ filter, updateFilter }) => (
           type="radio"
           name="radio"
           id="radio-1"
+          defaultChecked={Boolean(filter === FILTERS.ALL)}
           onClick={() => updateFilter(FILTERS.ALL)}
         />
         <label className="label" htmlFor="radio-1">
@@ -20,6 +21,7 @@ const Filters = ({ filter, updateFilter }) => (
           type="radio"
           name="radio"
           id="radio-2"
+          defaultChecked={Boolean(filter === FILTERS.DONE)}
           onClick={() => updateFilter(FILTERS.DONE)}
         />
         <label className="label" htmlFor="radio-2">
@@ -31,6 +33,7 @@ const Filters = ({ filter, updateFilter }) => (
           type="radio"
           name="radio"
           id="radio-3"
+          defaultChecked={Boolean(filter === FILTERS.PENDING)}
           onClick={() => updateFilter(FILTERS.PENDING)}
         />
         <label className="label" htmlFor="radio-3">
