@@ -1,0 +1,15 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "quotes": ["error", "single", "avoid-escape"],
+    "jsx-quotes": ["error", "prefer-single"],
+    "react/jsx-no-bind": [
+      "warn",
+      {
+        "ignoreRefs": true,
+        "allowArrowFunctions": false,
+        "allowBind": false
+      }
+    ]
+  }
+}
