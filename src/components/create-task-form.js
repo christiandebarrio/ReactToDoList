@@ -13,7 +13,7 @@ export default class CreateTaskForm extends Component {
   }
   handleAddTask() {
     const title = this.state.title
-    const task = { title, done: false, id: this.id++ }
+    const task = { title, isDone: false, id: this.id++ }
     const newTodos = this.props.todos.concat(task)
     this.props.update(newTodos)
     this.clearTaskInput()
