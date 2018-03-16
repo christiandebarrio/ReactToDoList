@@ -1,34 +1,35 @@
 import React, { Component } from 'react'
-
-export default class CreateTaskForm extends Component {
+import { connect } from 'react-redux'
+import { actions, selectors } from '../modules/forms'
+class CreateTaskForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { title: '' }
     this.id = 0
     this.handleChange = this.handleChange.bind(this)
     this.handleAddTask = this.handleAddTask.bind(this)
   }
   handleChange(e) {
-    this.setState({ title: e.target.value })
+    this.props.setInput(e.target.value)
   }
   handleAddTask() {
-    const title = this.state.title
+    const title = this.props.newTaskValue
     const task = { title, isDone: false, id: this.id++ }
     const newTodos = this.props.todos.concat(task)
     this.props.update(newTodos)
     this.clearTaskInput()
   }
   clearTaskInput() {
-    this.setState({ title: '' })
+    this.props.clearInput()
   }
   render() {
     return (
       <div className="todo-header">
         <div className="field inline-field">
           <input
+            name="newTask"
             type="text"
             placeholder="Escribe aquí para añadir"
-            value={this.state.title}
+            value={this.props.newTaskValue}
             onChange={this.handleChange}
             onKeyUp={e => e.keyCode === 13 && this.handleAddTask()}
           />
@@ -40,3 +41,16 @@ export default class CreateTaskForm extends Component {
     )
   }
 }
+
+const DOMAIN = 'newTask'
+
+const mapStateToProps = state => ({
+  newTaskValue: selectors.getInput(DOMAIN, state)
+})
+
+const mapDispatchToProps = {
+  setInput: value => actions.setInput(DOMAIN, value),
+  clearInput: () => actions.clearInput(DOMAIN)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskForm)
